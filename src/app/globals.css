@@ -1,0 +1,148 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color-bg: #f8fafc;
+  --color-fg: #0f172a;
+  --color-card: #ffffff;
+  --color-card-border: #e2e8f0;
+  --color-muted: #64748b;
+  --color-accent: #0891b2;
+  --animation-primary: #0891b2;
+  --animation-secondary: #2563eb;
+  --animation-accent: #059669;
+}
+
+.dark {
+  --color-bg: #050914;
+  --color-fg: #f8fafc;
+  --color-card: #0b1220;
+  --color-card-border: #1e293b;
+  --color-muted: #94A3B8;
+  --color-accent: #22D3EE;
+  --animation-primary: #22d3ee;
+  --animation-secondary: #3b82f6;
+  --animation-accent: #10b981;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--color-bg);
+  color: var(--color-fg);
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  overflow-x: hidden;
+  transition: background-color 200ms ease, color 200ms ease, border-color 200ms ease;
+}
+
+/* Base Light Theme Background Pattern */
+body {
+  background-image: 
+    linear-gradient(rgba(37, 99, 235, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(37, 99, 235, 0.04) 1px, transparent 1px),
+    radial-gradient(circle at top right, rgba(8, 145, 178, 0.08), transparent 40%);
+  background-size: 32px 32px, 32px 32px, auto;
+  background-attachment: fixed;
+}
+
+/* Dark Theme Background Overlay */
+.dark body {
+  background-color: #050914;
+  background-image: 
+    linear-gradient(rgba(5, 9, 20, 0.90), rgba(5, 9, 20, 0.94)),
+    url("/backgrounds/data-grid-dark.webp");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+/* Animated Text Gradient Class */
+.animate-text-gradient {
+  background-size: 200% auto;
+  animation: textGradient 6s linear infinite;
+}
+
+@keyframes textGradient {
+  0% {
+    background-position: 0% center;
+  }
+  50% {
+    background-position: 100% center;
+  }
+  100% {
+    background-position: 0% center;
+  }
+}
+
+/* View Transitions API Radial Circular Reveal */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+
+::view-transition-old(root) {
+  z-index: 1;
+}
+::view-transition-new(root) {
+  z-index: 9999;
+}
+
+.dark::view-transition-old(root) {
+  z-index: 9999;
+}
+.dark::view-transition-new(root) {
+  z-index: 1;
+}
+
+/* Custom Scrollbar styling */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+.dark ::-webkit-scrollbar-track {
+  background: #050914;
+}
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 4px;
+}
+.dark ::-webkit-scrollbar-thumb {
+  background: #1e293b;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #0891b2;
+}
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: #22d3ee;
+}
+
+/* Custom Selection */
+::selection {
+  background: #0891b2;
+  color: #ffffff;
+}
+.dark ::selection {
+  background: #22d3ee;
+  color: #050914;
+}
+
+/* Reduced Motion Override */
+@media (prefers-reduced-motion: reduce) {
+  .animate-text-gradient {
+    animation: none !important;
+  }
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
